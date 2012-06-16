@@ -63,6 +63,14 @@ if( $source_lst[0] eq "PACKAGE" || $source_lst[0] eq "REPO" ){
 
 my $is_error = 0;
 
+#enable_vmbroker();			### temp fix 	120811
+
+#initialize_master_clc();
+
+start_cloud_components();
+
+print "\n\n";
+
 for( my $i = 0; $i <= $max_cc_num; $i++){
 	start_cc($i);
 	start_nc($i);
@@ -71,21 +79,14 @@ for( my $i = 0; $i <= $max_cc_num; $i++){
 if( $source_lst[0] eq "BZR" ){
 	print "\n\n----------------------- Enabling Cloud Components -----------------------\n";
 
-	enable_cloud();
+#	enable_cloud();
 
-	enable_walrus();
+#	enable_walrus();
 
-	enable_sc();
+#	enable_sc();
 
 };
 
-enable_vmbroker();			### temp fix 	120811
-
-initialize_master_clc();
-
-start_cloud_components();
-
-print "\n\n";
 
 if( $is_error == 1 ){
 

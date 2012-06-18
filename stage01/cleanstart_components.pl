@@ -63,7 +63,7 @@ if( $source_lst[0] eq "PACKAGE" || $source_lst[0] eq "REPO" ){
 
 my $is_error = 0;
 
-#enable_vmbroker();			### temp fix 	120811
+enable_vmbroker();			### temp fix 	120811
 
 #initialize_master_clc();
 

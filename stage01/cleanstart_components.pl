@@ -71,6 +71,8 @@ start_cloud_components();
 
 print "\n\n";
 
+sleep(120);
+
 for( my $i = 0; $i <= $max_cc_num; $i++){
 	start_cc($i);
 	start_nc($i);

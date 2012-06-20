@@ -59,6 +59,17 @@ if( $source_lst[0] eq "PACKAGE" || $source_lst[0] eq "REPO" ){
 	$ENV{'EUCALYPTUS'} = "";
 };
 
+
+###	QUICK HACK FOR RHEL	062012
+if( $distro_lst[0] eq "RHEL" && $version_lst[0] =~ /^6/ ){
+	for( my $i = 0; $i <= $max_cc_num; $i++){
+		load_kvm_module($i);
+	};
+};
+
+
+
+
 ### Start Eucalyptus Components
 
 my $is_error = 0;
@@ -456,3 +467,30 @@ sub read_input_file{
 
 	return 0;
 };
+
+
+sub load_kvm_module{
+
+	my $group = sprintf("%02d", $_[0]);
+
+	print "\n\n----------------------- LOAD KVM MODULE NC$group -----------------------\n";
+	print "\nLoading KVM module on NC Group $group\n";
+
+	my $outstr = "";
+
+	my @my_nc_ips = split( / / , $nc_lst{"NC_$group"} );
+	foreach my $my_nc_ip (@my_nc_ips){
+
+		print "\n$my_nc_ip :: modprobe kvm_intel\n";
+		
+		#Start NCs
+		print("ssh -o StrictHostKeyChecking=no root\@$my_nc_ip \"modprobe kvm_intel\"\n");
+		$outstr = `ssh -o StrictHostKeyChecking=no root\@$my_nc_ip \"modprobe kvm_intel\"`;
+
+		print $outstr;
+		sleep(10);
+	};
+	return 0;
+};
+
+

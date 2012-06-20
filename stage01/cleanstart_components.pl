@@ -483,12 +483,21 @@ sub load_kvm_module{
 
 		print "\n$my_nc_ip :: modprobe kvm_intel\n";
 		
-		#Start NCs
+		#load module
 		print("ssh -o StrictHostKeyChecking=no root\@$my_nc_ip \"modprobe kvm_intel\"\n");
 		$outstr = `ssh -o StrictHostKeyChecking=no root\@$my_nc_ip \"modprobe kvm_intel\"`;
 
 		print $outstr;
-		sleep(10);
+		sleep(3);
+
+		print "\n$my_nc_ip :: modprobe vhost_net\n";
+		
+		#load module
+		print("ssh -o StrictHostKeyChecking=no root\@$my_nc_ip \"modprobe vhost_net\"\n");
+		$outstr = `ssh -o StrictHostKeyChecking=no root\@$my_nc_ip \"modprobe vhost_net\"`;
+
+		print $outstr;
+		sleep(3);
 	};
 	return 0;
 };

@@ -490,11 +490,18 @@ sub load_kvm_module{
 		print $outstr;
 		sleep(3);
 
-		print "\n$my_nc_ip :: modprobe vhost_net\n";
+		print "\n$my_nc_ip :: stop libvirtd\n";
 		
-		#load module
-		print("ssh -o StrictHostKeyChecking=no root\@$my_nc_ip \"modprobe vhost_net\"\n");
-		$outstr = `ssh -o StrictHostKeyChecking=no root\@$my_nc_ip \"modprobe vhost_net\"`;
+		print("ssh -o StrictHostKeyChecking=no root\@$my_nc_ip \"service libvirtd stop\"\n");
+		$outstr = `ssh -o StrictHostKeyChecking=no root\@$my_nc_ip \"service libvirtd stop\"`;
+
+		print $outstr;
+		sleep(3);
+
+		print "\n$my_nc_ip :: start libvirtd\n";
+		
+		print("ssh -o StrictHostKeyChecking=no root\@$my_nc_ip \"service libvirtd start\"\n");
+		$outstr = `ssh -o StrictHostKeyChecking=no root\@$my_nc_ip \"service libvirtd start\"`;
 
 		print $outstr;
 		sleep(3);

@@ -61,7 +61,7 @@ if( $source_lst[0] eq "PACKAGE" || $source_lst[0] eq "REPO" ){
 
 
 ###	QUICK HACK FOR RHEL	062012
-if( $distro_lst[0] eq "RHEL" && $version_lst[0] =~ /^6/ ){
+if( ($distro_lst[0] eq "RHEL" || $distro_lst[0] eq "CENTOS") && $version_lst[0] =~ /^6/ ){
 	for( my $i = 0; $i <= $max_cc_num; $i++){
 		load_kvm_module($i);
 	};
